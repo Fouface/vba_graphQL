@@ -1,0 +1,39 @@
+Sub QueryGraphQLAPI()
+    Dim url As String
+    Dim query As String
+    Dim request As Object
+    Dim response As String
+    
+    ' Set the URL of the GraphQL API
+    url = "https://example.com/graphql"
+    
+    ' Set the GraphQL query to fetch employee names
+    query = "{ employees { name } }"
+    
+    ' Create an XMLHTTP request object
+    Set request = CreateObject("MSXML2.XMLHTTP")
+    
+    ' Open the request with POST method
+    request.Open "POST", url, False
+    
+    ' Set the request headers
+    request.setRequestHeader "Content-Type", "application/json"
+    request.setRequestHeader "Accept", "application/json"
+    
+    ' Construct the GraphQL request payload
+    payload = "{ ""query"": """ & query & """ }"
+    
+    ' Send the request with the payload
+    request.send payload
+    
+    ' Get the response text
+    response = request.responseText
+    
+    ' Parse and process the response as per your needs
+    ' For example, extract employee names from the response
+    ' Assuming the response follows the format: { "data": { "employees": [ { "name": "John" }, { "name": "Jane" } ] } }
+    ' You can use a JSON parser or simple string manipulation to extract the names
+    
+    ' Display the response in the Immediate Window
+    Debug.Print response
+End Sub
